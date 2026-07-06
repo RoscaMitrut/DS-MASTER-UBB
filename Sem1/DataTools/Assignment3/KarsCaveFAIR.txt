@@ -1,0 +1,13 @@
+Findable
+    Unique identifier: specific, descriptive name (KarstCave_FormationData_2024), acting as an identifier
+    Rich Metadata: Dublin Core => easily indexed by search engines
+    Keywords: location (Postojna Cave), subject (Speleology), etc.
+Accessible
+    I assumed the scenario implies the data is being prepared for a public data repository
+    Even if the data were restricted, the README and JSON-LD files would remain available to describe te resource
+Interoperability
+    use of Dublin Core
+    Providing README and JSON-LD ensures machines can parse and understand relationships between data fields
+Reusability
+    Clear variable definitions (README table defines all columns exactly)
+    Description of the collection method (XRD) helps users assess if the data suits their needs

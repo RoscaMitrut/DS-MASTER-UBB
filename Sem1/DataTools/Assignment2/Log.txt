@@ -1,0 +1,10 @@
+Environment
+    - OS: Windows 11 Pro, Version 10.0.26200 Build 26200
+    - CPU: AMD Ryzen 5 5600H
+    - GPU: NVIDIA GeForce RTX 3060 Laptop GPU
+    - Python Version: 3.19.9
+    - GPU Drivers: 581.57
+    - CUDA: 13.0
+    - CuDNN: 9.1.2
+Instalations:
+    - Unfortunately I setup Pytorch a while ago, so I don't remember the steps I took. I also think I didn't encounter any errors.

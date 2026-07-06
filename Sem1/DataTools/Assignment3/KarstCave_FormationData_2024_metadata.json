@@ -1,0 +1,24 @@
+{
+    "@context": "https://dublincore.org/schemas/api/terms/",
+    "@type": "Dataset Metadata",
+    "title": "KarstCave_FormationData_2024",
+    "subject": "Speleology",
+    "creator": {
+        "@type": "Organization",
+        "name": "Multidisciplinary research group"
+    },
+    "description": "This dataset includes mineral composition, formation type, and moisture data from 150 rock samples collected in the Postojna Cave System (Slovenia). Each record represents a unique rock formation sample with physical measurements, mineral identification (via XRD analysis), and environmental context.",
+    "keywords": ["Speleology", "Rock Formations", "Postojna Cave", "Slovenia", "Mineral Composition", "Geology"],
+    "date": "2024-03/2024-07",
+    "coverage": {
+        "@type": "Place",
+        "name": "Postojna Cave System, Slovenia",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 45.7813,
+            "longitude": 14.2041
+        }
+    },
+    "format": "text/csv",
+    "identifier": "KarstCave_FormationData_2024"
+}

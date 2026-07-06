@@ -1,0 +1,12 @@
+dataset_name: Synthetic Institutional Records Dataset
+description: Synthetic records simulating an internal institutional registry (e.g., hospital log, sensor data, or transactions).
+source: Synthetic
+license: Educational Use Only
+time_coverage:
+  start: 2022-01-01
+  end: 2023-12-31
+update_frequency: Static
+contact: reduardmitrut@gmail.com
+constraints: >-
+  Sensitive internal simulation. Do not upload to public repositories (GitHub, GitLab, etc.). 
+  The repository must work offline.

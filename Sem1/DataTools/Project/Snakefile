@@ -1,0 +1,79 @@
+import os
+import sys
+
+WIN_PYTHON = "venv\\Scripts\\python.exe"
+SNAKE_PYTHON = "venv/Scripts/python.exe"
+
+rule all:
+    input:
+        "reports/summary.md"
+
+rule setup_env:
+    input:
+        "requirements.txt"
+    output:
+        SNAKE_PYTHON
+    shell:
+        "python -m venv venv && "
+        "{WIN_PYTHON} -m pip install -r requirements.txt"
+
+rule verify_integrity:
+    input:
+        python = SNAKE_PYTHON,
+        checksums = "docs/checksums.sha256",
+        script = "src/checksum.py" 
+    output:
+        "docs/integrity_verified.flag"
+    shell:
+        "{WIN_PYTHON} {input.script} verify && type NUL > {output}"
+
+rule clean_data:
+    input:
+        flag = "docs/integrity_verified.flag",
+        script = "src/clean_data.py",
+        raw22 = "data/raw/records_2022.csv",
+        raw23 = "data/raw/records_2023.csv"
+    output:
+        csv = "data/processed/cleaned_records.csv",
+        parquet = "data/processed/cleaned_records.parquet"
+    shell:
+        "{WIN_PYTHON} {input.script}"
+
+rule report:
+    input:
+        csv = "data/processed/cleaned_records.csv"
+    output:
+        "reports/summary.md"
+    run:
+        with open(output[0], 'w') as f:
+            f.write("# Data Summary Report\n")
+            f.write("Generated automatically by Snakemake.\n\n")
+            f.write("## Row Counts\n")
+            with open(input.csv, 'r') as data:
+                row_count = len(data.readlines()) - 1
+            f.write(f"Cleaned Rows: {row_count}\n")
+
+rule clean:
+    run:
+        import shutil
+        import glob
+        import os
+
+        patterns = [
+            "data/processed",     
+            "venv",              
+            "reports/*",     
+            "docs/integrity_verified.flag" 
+        ]
+
+        for pattern in patterns:
+            for path in glob.glob(pattern):
+                try:
+                    if os.path.isdir(path):
+                        shutil.rmtree(path)
+                        print(f"Removed directory: {path}")
+                    else:
+                        os.remove(path)
+                        print(f"Removed file: {path}")
+                except Exception as e:
+                    print(f"Warning: Could not remove {path}. Reason: {e}")

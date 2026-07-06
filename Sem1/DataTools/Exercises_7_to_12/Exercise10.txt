@@ -1,0 +1,5 @@
+1.
+grep "telemea" cheese_analyses.csv | wc -l
+
+2+3.
+cut -d',' -f2 cheese_analyses.csv > cheese_types.txt

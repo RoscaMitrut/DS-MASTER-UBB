@@ -1,0 +1,7 @@
+Current Overall Data Version: v2.0.0
+Date: 2025-11-20
+
+- v1.0.0: Raw data cheese_analyses.csv.
+- v1.0.1: Corrected 2 "fake" errors in 'quantity' and 'months' columns for 2 records.
+- v1.1.0: Added 'maturation_stage' derived column.
+- v2.0.0: Performed a purge of rows with missing data.
