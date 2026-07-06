@@ -8,7 +8,7 @@
 - [Colectarea si modelarea datelor](./Sem1/DCM/)
 - ### Sem 2
 - [Analiza datelor si descoperirea cunostintelor](./Sem2/DataAnalysis/)
-- Instrumente de programare
+- [Instrumente de programare](./Sem2/ProgrammingToolkit/)
 - [Modelare inteligenta](./Sem2/MI/)
 - [Retele Complexe: Analiza Datelor folosind stiinta Retelelor](./Sem2/ComplexNetworks/)
 ## Year 2
