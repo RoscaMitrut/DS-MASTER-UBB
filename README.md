@@ -10,7 +10,7 @@
 - [Analiza datelor si descoperirea cunostintelor](./Sem2/DataAnalysis/)
 - Instrumente de programare
 - Modelare inteligenta
-- Retele Complexe: Analiza Datelor folosind stiinta Retelelor
+- [Retele Complexe: Analiza Datelor folosind stiinta Retelelor](./Sem2/ComplexNetworks/)
 ## Year 2
 ### Sem 1
 ### Sem 2

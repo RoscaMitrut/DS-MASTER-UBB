@@ -4,3 +4,7 @@ __pycache__/
 Sem1/Etica/GenAI.txt
 /Sem1/DCM/data
 /Sem2/DataAnalysis/data
+Sem2/ComplexNetworks/FinalProject/.env
+Sem2/ComplexNetworks/FinalProject/full_movie_data.csv
+Sem2/ComplexNetworks/FinalProject/imdb_top_movies.csv
+Sem2/ComplexNetworks/FinalProject/top_actors_summary.csv
