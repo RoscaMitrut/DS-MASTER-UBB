@@ -1,7 +1,7 @@
 # DS-MASTER-UBB
 ## Year 1
 ### Sem 1
-- Bazele statisticii
+- [Bazele statisticii](./Sem1/BS/)
 - [Instrumente pentru gestiunea datelor](./Sem1/DataTools/)
 - Gandire algoritmica
 - Etica si integritate academica in stiinta datelor
