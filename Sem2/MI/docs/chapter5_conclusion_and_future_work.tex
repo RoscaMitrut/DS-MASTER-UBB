@@ -1,0 +1,16 @@
+\chapter{Conclusion and future work}
+\label{chapter:concl}
+
+\section{Strengths and Limitations}
+
+\paragraph{Strengths}
+The experimental design has several genuine strengths. The use of identical branch architectures across STL and MTL ensures that observed differences are attributable to the sharing mechanism rather than to model capacity. The preliminary 15-sample run validated the pipeline before committing to the full dataset, catching degenerate behaviour early. The inclusion of two cross-talk variants: one based on global linear mixing and one on channel-selective gating, provides a meaningful architectural comparison rather than evaluating a single design choice. Finally, the reporting of per-class precision, recall, and support throughout makes the effect of class imbalance transparent and prevents misleading interpretation of accuracy figures.
+
+\paragraph{Limitations}
+The most significant limitation is the extreme class imbalance in the texture task. With 97 of 101 test samples belonging to the solid class, neither the texture classifier nor the multi-task framework can be meaningfully evaluated on ground-glass or part-solid prediction. This imbalance stems from the composition of the LIDC-IDRI dataset itself and from the majority-vote aggregation strategy, which tends to promote the most frequent annotation. Addressing this would require either oversampling of minority-class nodules, class-weighted loss functions, or a substantially larger dataset with better subtype representation.
+
+A second limitation is the reduction from three tasks to two. The exclusion of the progression head due to the missing join key between the clinical CSV and the DICOM XML files removes the task most likely to benefit from shared representations, since longitudinal behaviour is more directly linked to both texture and malignancy than either task is to the other. The architecture was therefore evaluated in a setting weaker than the one it was designed for.
+
+Third, the dataset size of 508 samples is modest for training convolutional networks with multiple independent branches. The co-attention unit introduces additional learnable parameters in the form of MLP gate networks at each depth level, which likely overfit or fail to converge meaningfully at this scale. This may explain why the architecturally richer co-attention variant underperforms the simpler cross-stitch unit despite its greater expressive capacity.
+
+Finally, all models operate on a single 2D slice selected from the middle of the nodule's spatial extent. This representation discards volumetric information that radiologists routinely use to assess nodule morphology. A 3D convolutional or volumetric approach would be more faithful to the clinical diagnostic process, at the cost of substantially higher data and compute requirements.

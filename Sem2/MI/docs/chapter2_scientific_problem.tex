@@ -1,0 +1,61 @@
+\chapter{Scientific Problem}
+\label{section:scientificProblem}
+\section{Problem description}
+\label{section:problemDescription}
+Low-dose computed tomography (CT) screening has drastically improved the early
+detection of lung cancer, but at the same time it introduced a clinical
+dilemma: the management of indeterminate lung nodules. When a nodule is
+detected, its clinical trajectory is highly uncertain. It may remain harmless
+and slow-growing for a patient's entire life, but it could also progress into
+aggressive metastatic lung cancer at a fast pace.
+
+Currently, radiologists and oncologists rely on a subjective synthesis of heterogeneous attributes, such as the nodule's radiological subtype (solid, part-solid, ground-glass), volumetric growth patterns over time, and subtle morphological textures to stratify risk. Because this manual assessment is highly variable among practitioners, it frequently leads to two adverse outcomes: overtreatment, where patients with benign nodules are subject to invasive, risky, and expensive biopsies or undertreatment, where aggressive tumors are not removed in time.
+
+\section{Why an Intelligent Algorithm is Mandatory}
+\label{section:whyAnIntelligentAlgorithmIsMandatory}
+This problem requires an intelligent algorithm because the underlying data exceeds human cognitive and visual processing capacities. The human visual system cannot reliably extract tiny, complex patterns from 3D medical images. Furthermore, rule based clinical guidelines or standard linear statistical models fail because lung cancer progression depends on many complex factors.
+
+Deep learning algorithms are uniquely capable of automatically extracting latent hierarchical representations from raw pixel and voxel data. More importantly, a multi-task algorithm is hypothesized to better capture the
+biological reality that a nodule's morphology, growth rate, and ultimate malignancy are deeply interdependent phenomena, rather than isolated variables.
+
+\section{Solution Methods}
+\label{section:solutionMethods}
+
+To effectively predict nodule malignancy (T1), progression (T2), and subtype (T3) from medical images, we evaluate two different frameworks: an approach that treats each task separately, and a joint-learning method designed to capture their biological overlap. Note that while the full three-task formulation defines the intended scope of this work, T2 (progression) was excluded from the final implementation due to a data linkage constraint described in detail in Section~\ref{section:experimentsAndResults}: the clinical file containing progression labels does not share a common identifier with the DICOM XML annotation files, making it impossible to unambiguously match progression labels to individual CT crops.
+
+\subsection{Traditional Baseline: Single-Task Learning (STL)}
+The traditional baseline approach utilizes Single-Task Learning, where separate networks are trained independently for malignancy, progression, and subtype. The primary advantage of these models is that they are straightforward to implement and optimize. Hyperparameter tuning is relatively simple, and the loss landscape for a single objective is generally well behaved. However, a major disadvantage is that STL completely ignores the biological correlations between the tasks. It forces the models to learn redundant feature extractors from scratch for each task. This is highly inefficient and increases the risk of overfitting, which is a critical flaw when working with limited medical datasets like LIDC-IDRI or LNDb.
+
+\subsection{Proposed Solution: Multi-Task Learning (MTL) with Cross-Talk}
+The proposed solution employs Multi-Task Learning equipped with cross-talk. By jointly predicting T1, T2, and T3, MTL acts as a strong inductive bias and a natural regularizer. Shared layers allow the model to leverage larger, combined pools of information, making the learned representations far more robust. The advantage of cross-talk mechanisms, such as cross-stitch units or co-attention, is that they elevate this by dynamically controlling how information flows between task specific branches. This allows the model to autonomously determine, for example, how much a specific visual texture should influence the overall malignancy prediction. On the other hand, a significant disadvantage is that MTL architectures are difficult to tune. They are highly susceptible to negative transfer, where optimizing one task degrades the performance of another, or task domination, where the loss of a complex task overwhelms a simpler one.
+
+\section{Formal Problem Definition}
+\label{section:formalProblemDefinition}
+The objective is to formulate a multi-task learning mapping function capable of joint inference over nodule-level CT imaging data.
+
+\subsection{Inputs}
+
+Let the input space be defined as $X \subset \mathbb{R}^{1 \times 128 \times 128}$, where each element $x \in X$ is a single-channel, two-dimensional CT crop of size $128 \times 128$ pixels centered on a radiologist-annotated nodule region of interest. Raw pixel values are converted to Hounsfield Units (HU) using the DICOM \texttt{RescaleSlope} and \texttt{RescaleIntercept} attributes, clipped to the range $[-1000,\,400]$\,HU, and normalized to $[0, 1]$.
+
+\subsection{Outputs}
+The MTL model learns a parameterized function $f_\theta: X \rightarrow (\hat{Y}_1, \hat{Y}_2, \hat{Y}_3)$
+ to predict three distinct target spaces:
+
+\begin{itemize}
+  \item \textbf{T1 --- Nodule malignancy risk:} $\hat{Y}_1 \in \{0, 1\}$, where 0 is Benign and 1 is Malignant.
+  \item \textbf{T2 --- Two-year progression probability:} $\hat{Y}_2 \in \{0, 1\}$, where 0 is Stable and 1 is Progressive.
+  \item \textbf{T3 --- Radiological subtype classification:} $\hat{Y}_3 \in \{0, 1, 2\}$, representing a multiclass prediction (0 = solid, 1 = part-solid, 2 = ground-glass).
+\end{itemize}
+
+\subsection{Objective}
+The network optimizes task-specific parameters $\theta_1, \theta_2, \theta_3$, potentially alongside a foundational shared backbone $\theta_{\mathrm{shared}}$, and cross-talk routing parameters $\alpha$ (cross-stitch matrices / co-attention weights). These parameters are jointly trained to minimize a globally weighted loss function:
+
+$\mathcal{L}_{total} = \lambda_1 \mathcal{L}_{BCE}(\hat{Y}_1, Y_1) + \lambda_2 \mathcal{L}_{BCE}(\hat{Y}_2, Y_2) + \lambda_3 \mathcal{L}_{CE}(\hat{Y}_3, Y_3)$
+
+where $\mathcal{L}_{BCE}$ is Binary Cross-Entropy, $\mathcal{L}_{CE}$ is Categorical Cross-Entropy, and $\lambda_i$ are dynamic weighting hyperparameters to balance task gradients.
+
+\section{Motivation}
+\label{section:motivation}
+This problem directly impacts patient survival. An accurate, generalized model can fundamentally alter the clinical workflow for pulmonary oncology. By accurately identifying high risk nodules early, life saving treatments can start sooner. On the flip side, by confidently identifying indolent nodules, the system reduces the immense psychological and financial cost of unnecessary biopsies and repeated radiation exposure.
+
+From an AI perspective, translating deeply interconnected biological traits into a computational architecture is a state-of-the-art challenge. Designing cross-talk mechanisms that avoid negative transfer in noisy, high-dimensional medical data pushes the boundaries of multi-task network design.

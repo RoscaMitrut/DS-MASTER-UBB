@@ -1,0 +1,44 @@
+{
+  "task": "multitask",
+  "model_path": "code\\projects-team7\\code\\src\\training\\multitask_texture_malignancy_cross_talk.pt",
+  "source_image_path": "code\\data\\LIDC-IDRI\\LIDC-IDRI-0124\\01-01-2000-NA-CAP-93667\\3.000000-Recon 2 C-A-P-11437\\1-031.dcm",
+  "preprocessed_image_path": "code\\projects-team7\\code\\src\\inference\\outputs\\multitask_LIDC-IDRI-0124_135040_1.3.6.1.4.1.14519.5.2.1.6279.6001.251509450553310682199044923081_preprocessed.png",
+  "labels_path": "code\\projects-team7\\code\\src\\inference\\outputs\\multitask_LIDC-IDRI-0124_135040_1.3.6.1.4.1.14519.5.2.1.6279.6001.251509450553310682199044923081_labels.json",
+  "sample": {
+    "patient_id": "LIDC-IDRI-0124",
+    "nodule_id": "135040",
+    "target_uid": "1.3.6.1.4.1.14519.5.2.1.6279.6001.251509450553310682199044923081",
+    "frame_path": "code\\data\\LIDC-IDRI\\LIDC-IDRI-0124\\01-01-2000-NA-CAP-93667\\3.000000-Recon 2 C-A-P-11437\\1-031.dcm",
+    "bbox": {
+      "xmin": 353,
+      "ymin": 278,
+      "xmax": 359,
+      "ymax": 284
+    },
+    "texture_label_idx": 2,
+    "malignancy_label": 0
+  },
+  "ground_truth": {
+    "sample_index": 69,
+    "sample_source": "random_test",
+    "texture_index": 2,
+    "texture_label": "solid",
+    "malignancy_index": 0,
+    "malignancy_label": "benign"
+  },
+  "predicted": {
+    "texture_index": 2,
+    "texture_label": "solid",
+    "texture_probabilities": {
+      "ground-glass": 0.006282079964876175,
+      "part-solid": 0.0013410814572125673,
+      "solid": 0.9923768043518066
+    },
+    "malignancy_index": 0,
+    "malignancy_label": "benign",
+    "malignancy_probabilities": {
+      "benign": 0.6018460392951965,
+      "malignant": 0.3981539309024811
+    }
+  }
+}

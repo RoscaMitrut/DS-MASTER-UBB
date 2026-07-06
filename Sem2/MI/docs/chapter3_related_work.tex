@@ -1,0 +1,90 @@
+
+\chapter{Related work}
+\label{chapter:stateOfArt}
+
+% The theory of the methods utilised until now in order to solve the given problem.
+
+% Answer the following questions for each piece of related work that addresses the same or a similar problem. 
+% \begin{itemize}
+% 	\item What is their problem and method? 
+% 	\item How is your problem and method different? 
+% 	\item Why is your problem and method better?
+% \end{itemize}
+
+Recent advances in deep learning have significantly improved automated analysis of medical imaging data, particularly in lung cancer screening using computed tomography (CT). Lung nodules detected during low-dose CT screening present a major diagnostic challenge, as their clinical significance varies widely: some nodules remain stable for years, while others rapidly progress to malignancy. Accurate risk stratification therefore requires the integration of multiple heterogeneous sources of information, including imaging characteristics, volumetric growth patterns, and patient clinical data.
+
+Multi-task learning (MTL) has been applied to improve lung nodule classification in CT images. The authors of \cite{zhai2020} propose a multi-task CNN (MT-CNN) that distinguishes malignant from benign nodules using two tasks: a main classification task and an auxiliary image reconstruction task. The model extracts nine 2D views from each 3D nodule and processes each view with a shared network followed by two branches: one for classification and one for reconstruction. The final prediction is obtained by a weighted fusion of the nine view-specific models, allowing the network to capture 3D spatial information while maintaining lower computational complexity.
+
+The method is evaluated on two publicly available datasets, LIDC-IDRI and LUNA-16. LIDC-IDRI contains 1,018 annotated CT scans with radiologist-provided malignancy scores, while LUNA-16 is a subset of LIDC-IDRI designed for nodule detection and classification tasks.
+
+The proposed MT-CNN achieves strong performance compared to state-of-the-art approaches, reaching an AUC of 97.3\% on LUNA-16 and 95.59\% on LIDC-IDRI, along with a low false positive rate of 3.2\%. These results demonstrate that incorporating an auxiliary reconstruction task helps preserve fine-grained image features and improves classification accuracy.
+
+Our work differs in that we address a prognostic setting with multiple clinically meaningful tasks: malignancy risk prediction, two-year progression probability, and radiological subtype classification. Instead of using reconstruction as an auxiliary task, our model jointly learns these related clinical endpoints. Our approach is more informative for clinical decision support because it predicts several complementary outcomes simultaneously and analyzes their interactions, providing richer insights than a single malignancy classification task.
+
+\vspace{0.5cm}
+
+MTL has also been explored to improve both prediction accuracy and interpretability in lung nodule analysis. Wang et al.\cite{wang2021} propose IMAL-Net, an interpretable multi-task attention network for screening invasive lung adenocarcinoma from CT images. Their method jointly performs two tasks: lung nodule segmentation and invasiveness classification, using two sub-ResNet networks connected through a prior-attention mechanism. The segmentation branch provides spatial priors that guide the classification branch, while radiomic features extracted from segmentation masks are fused with deep semantic features to improve both performance and interpretability.
+
+The model is trained and evaluated on a large, non-public clinical dataset consisting of 1,626 patients collected from two hospitals, with biopsy-confirmed labels, and an additional external validation set of 200 nodules. This makes the dataset clinically reliable but not publicly available.
+
+IMAL-Net achieves strong performance, reaching an AUC of 93.8\% and a recall of 93.8\% in identifying invasive lung adenocarcinoma. The results show that combining segmentation, attention mechanisms, and radiomic-semantic feature fusion improves both classification accuracy and model interpretability.
+
+In our work, we focus on lung nodule prognostics with three prediction tasks: malignancy risk, two-year progression probability, and radiological subtype classification. Instead of combining segmentation and classification only, our model learns multiple clinically meaningful endpoints simultaneously and explicitly models interactions between them. Our approach provides richer clinical information because it predicts several complementary outcomes within a single framework. By jointly modeling malignancy, progression risk, and radiological subtype, the model can capture relationships between these factors and support more comprehensive clinical decision making.
+
+\vspace{0.5cm}
+
+Multi-task learning has also been used to jointly exploit the relationships between different lung nodule analysis tasks. Wang et al.\cite{wang2022} propose DeepLN, a multi-task deep learning framework that simultaneously predicts imaging characteristics, malignancy, and pathological subtypes from CT scans. The model is based on a 3D-ResNet backbone and incorporates auxiliary tasks, such as nodule density and morphological feature classification, to guide the main tasks and improve feature representation.
+
+The model is trained on a large retrospective clinical dataset of 8,950 pulmonary nodules from 5,823 patients, with pathology-confirmed labels serving as the gold standard. This dataset is not publicly available but provides strong clinical reliability.
+
+DeepLN demonstrates strong performance across multiple tasks. For malignancy prediction, it achieves an AUC of 0.8503 on the test set, while for pathological subtype classification, it reaches AUCs of 0.8675 for adenocarcinoma and 0.8792 for squamous cell carcinoma. Additionally, the inclusion of auxiliary imaging features improves performance compared to single-task models, highlighting the benefit of multi-task learning.
+
+In contrast, our work focuses on lung nodule prognostics rather than combining imaging feature prediction with classification tasks. Our model jointly predicts malignancy risk, two-year progression probability, and radiological subtype, which represent clinically meaningful endpoints rather than intermediate imaging features. By modeling these related outcomes together, our approach provides more comprehensive clinical decision support and captures relationships between biological and radiological factors.
+
+\vspace{0.5cm}
+
+Another multi-task approach is proposed by Ni et al.\cite{ni2021}, who introduce a two-stage multitask U-Net framework for pulmonary nodule segmentation and malignancy risk prediction. Their method follows a coarse-to-fine strategy, where a 3D multiscale U-Net (MU-Net) first localizes the nodule region, followed by a 2.5D multiscale separable U-Net (MSU-Net) that refines segmentation and performs multi-task classification. The model jointly predicts malignancy along with radiological characteristics such as margin, texture, and calcification by sharing features between segmentation and classification branches.
+
+The approach is evaluated on the public LIDC-IDRI dataset, using 1,561 annotated nodules with radiologist-provided labels. Experimental results show strong performance, achieving a Dice similarity coefficient of 83.04\% for segmentation and an AUC of 84.3\% for malignancy prediction. The results demonstrate that integrating segmentation and classification in a multitask framework improves both feature representation and predictive accuracy.
+
+While this approach improves diagnostic performance by leveraging segmentation cues and radiological feature prediction, it focuses primarily on detection and characterization tasks. In contrast, our work addresses a broader prognostic setting by jointly modeling malignancy risk, progression probability, and radiological subtype. This formulation enables the model to capture dependencies between clinically meaningful outcomes and provide richer insights into lung nodule behavior.
+
+\vspace{0.5cm}
+
+Radiomics-based approaches have also been proposed to predict the growth behavior of pulmonary nodules. Sun et al.\cite{SUN2023110684} develop a CT-based radiomics model to predict the growth or long-term stability of pulmonary ground-glass nodules (GGNs). Their method involves manual segmentation of nodules followed by extraction of high-dimensional radiomic features (1218 features), including intensity, shape, and texture descriptors. Feature selection is performed using mRMR and LASSO, and a radiomics signature is constructed via logistic regression.
+
+The model is trained and validated on a dataset of 253 patients with 1115 CT images, split into training (70\%) and validation (30\%) sets. A combined nomogram integrating radiomics features with clinical factors (age, size, and location) achieves the best predictive performance, with AUC values of 0.843 in the training set and 0.824 in the validation set. The radiomics model significantly outperforms traditional clinical features, demonstrating the advantage of capturing tumor heterogeneity through quantitative imaging descriptors.
+
+However, this approach focuses on a single prediction task, namely distinguishing between growing and stable nodules. In contrast, our work adopts a multi-task learning framework that simultaneously predicts malignancy risk, progression probability, and radiological subtype. By jointly modeling multiple clinically relevant outcomes, our approach captures interdependencies between different aspects of lung nodule behavior and provides more comprehensive prognostic information for clinical decision making.
+
+\vspace{0.5cm}
+
+Another related approach focuses on the automatic categorization of pulmonary nodules based on their radiological characteristics. Tu et al.\cite{tu2017} propose a convolutional neural network (CNN)-based computer-aided diagnosis (CADx) system for the automatic categorization of solid, part-solid, and non-solid pulmonary nodules in CT images. Their method operates directly on two-dimensional regions of interest (ROIs) without requiring explicit nodule segmentation, allowing the model to learn hierarchical features directly from image context and avoid errors associated with segmentation.
+
+The framework supports both classification (three nodule types) and regression (radiological scoring from 1 to 5), and is trained on the LIDC dataset containing annotations from multiple radiologists. Experimental results show that the CNN significantly outperforms traditional histogram-based methods and achieves substantial agreement with expert radiologists, with Cohen's kappa values around 0.74.
+
+While this work focuses on improving automated categorization and scoring of nodule types, it primarily addresses a single aspect of nodule characterization. In contrast, our approach extends this idea by incorporating radiological subtype classification as one of several tasks within a multi-task learning framework. By jointly predicting radiological subtype together with malignancy risk and progression probability, our model leverages shared representations across tasks and provides a more comprehensive characterization of lung nodules for clinical decision support.
+
+\vspace{0.5cm}
+
+A different multi-task strategy for lung nodule analysis is proposed in MTMR-Net \cite{Liu2020}. This model jointly performs benign–malignant classification and regression of multiple radiological semantic attributes, including spiculation, lobulation, sphericity, calcification, and others. The architecture is based on a shared ResNet backbone with two task-specific branches: a classification module and a regression module, where attribute features are explicitly fed into the classification branch to model a cause-and-effect relationship between semantic characteristics and malignancy. In addition, the model incorporates a Siamese network trained with a margin ranking loss to improve discrimination between ambiguous nodules by enforcing correct ordering of malignancy scores.
+
+The method is evaluated on the publicly available LIDC-IDRI dataset, which contains 1,018 CT scans and 1,422 annotated nodules with malignancy scores and radiological attributes provided by multiple radiologists. The experiments are conducted using five-fold cross-validation to ensure robustness.
+
+Experimental results show that MTMR-Net achieves strong performance, reaching an accuracy of 93.5\%, sensitivity of 93.0\%, and AUC of 0.979 for malignancy classification, outperforming several state-of-the-art methods. Additionally, the model achieves lower absolute error in attribute score regression compared to traditional methods such as LASSO and elastic net, demonstrating the effectiveness of jointly modeling classification and semantic attributes.
+
+In contrast, our work focuses on lung nodule prognostics with multiple clinical endpoints rather than malignancy classification alone. Besides predicting malignancy risk, our model also estimates two-year progression probability and radiological subtype, capturing complementary aspects of nodule behavior over time. This approach provides richer clinical insight by modeling interactions between several prognostic outcomes and better reflects the biological complexity of lung nodules for clinical decision making.
+
+\vspace{0.5cm}
+
+Recent work has also explored the integration of domain-specific semantic information into deep learning models for lung nodule analysis. Dong et al.~\cite{dong2023} propose a 3D convolutional neural network (SCCNN) that incorporates radiological semantic characteristics as auxiliary tasks within a multi-task learning framework. The model extracts multi-view 3D patches of lung nodules and processes them using a shared CNN backbone with task-specific branches for malignancy classification and semantic feature prediction. In addition, a Convolutional Block Attention Module (CBAM) is introduced to enhance feature fusion by focusing on the most informative spatial and channel-wise features.
+
+The model is trained and evaluated on the publicly available LIDC-IDRI dataset, which contains over 1,000 CT scans with annotations from multiple radiologists, including semantic characteristics such as lobulation, spiculation, subtlety, and malignancy scores. After preprocessing and data cleaning, 1,779 nodules are used for training and evaluation.
+
+Experimental results show that the proposed SCCNN significantly outperforms a baseline 3D CNN. The model achieves an AUC of up to 0.973 and an accuracy of 95.45\% when combining semantic characteristics and attention mechanisms, compared to 89.77\% accuracy for the baseline model. These results demonstrate that incorporating semantic features improves both classification performance and interpretability.
+
+In contrast, our work focuses on lung nodule prognostics with multiple clinical endpoints. Instead of predicting malignancy alone, our model jointly estimates malignancy risk, two-year progression probability, and radiological subtype. This allows us to capture relationships between different aspects of nodule behavior and provide more comprehensive prognostic information for clinical decision making.
+
+\vspace{0.5cm}
+
+In addition to task-specific approaches, several studies have reviewed the broader landscape of multi-task learning in deep neural networks. Crawshaw\cite{crawshaw2020multitasklearningdeepneural} provides a comprehensive survey of multi-task learning methods and their applications across different domains. The survey discusses the main categories of MTL architectures, including hard parameter sharing, soft parameter sharing, cross-stitch networks, and attention-based task interaction mechanisms. It also highlights the benefits of MTL in improving generalization, reducing overfitting, and enabling knowledge transfer between related tasks. The survey emphasizes that MTL is particularly effective when tasks share underlying representations, which has motivated its increasing adoption in complex prediction problems such as medical image analysis.

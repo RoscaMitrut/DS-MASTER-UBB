@@ -1,0 +1,38 @@
+\chapter{Introduction}
+\label{chapter:introduction}
+
+\section{What? Why? How?}
+\label{section:what}
+
+% Motivate and abstractly describe the problem you are addressing and how you are addressing it. 
+% \begin{itemize}
+% 	\item What is the (scientific) problem? 
+% 	\item Why is it important? 
+% 	\item What is your basic approach? 
+% \end{itemize}
+
+% A short discussion of how it fits into related work in the area is also desirable. Summarize the basic results and conclusions that you will present. 
+
+Lung cancer screening saves lives, but it frequently reveals ``indeterminate'' lung nodules that could be harmless and dormant, or aggressive and deadly. The scientific problem we address is the accurate, automated risk stratification of these uncertain nodules from low-dose CT scans.
+
+Currently, deciding what to do with an indeterminate nodule relies heavily on a radiologist's subjective visual assessment of its size, shape, and physical texture. Because this process is vulnerable to human error and inter-reader variability, it often leads to two devastating extremes: overtreatment, where healthy patients are subjected to invasive, expensive, and stressful biopsies, or undertreatment, where malignant tumors are missed until it is too late. The underlying visual data is simply too complex and high-dimensional for the human eye to process with perfect consistency.
+
+To address this, we developed an intelligent algorithm that mimics the interconnected nature of clinical biology. Traditional machine learning models often treat a nodule's physical traits (like its texture) and its ultimate cancer risk as completely separate problems. Our approach bridges this gap. We propose \textit{MultiTaskCrossTalkNet}, a multi-task deep learning architecture that evaluates these factors simultaneously. By utilizing ``cross-talk'' mechanisms, the model dynamically shares information between its internal pathways, learning that a nodule's physical composition, malignancy risk and its rate of progression are biologically linked.
+
+
+\section{Paper structure and original contribution(s)}
+\label{section:structure}
+
+The main contribution of this report is to present an intelligent algorithm for solving the problem of simultaneous lung nodule texture classification, malignancy risk prediction and progression classification using a multi-task deep learning approach with cross-talk mechanisms.
+
+The present work is structured in five chapters as follows. %TODO
+
+The first chapter introduces the research topic, explains its importance, and presents the objectives and contributions of the thesis. It also provides an overview of the structure of the paper.
+
+The second chapter presents the scientific problem addressed in this thesis, explicitly defining the formal inputs, outputs, and the necessity for an intelligent multi-task approach.
+
+The third chapter presents the related work and describes existing approaches.
+
+The fourth chapter presents the data that was used, details the proposed methodology, outlines the experiments and results, and concludes with a discussion of the model's strengths and limitations.
+
+Finally, the last chapter summarizes the conclusions of the thesis and outlines possible future improvements and research directions.

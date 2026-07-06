@@ -1,0 +1,125 @@
+\documentclass[runningheads,a4paper,11pt]{report}
+\usepackage{algorithmic}
+\usepackage{algorithm} 
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{caption}
+\usepackage{comment} 
+\usepackage{epsfig} 
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{geometry} 
+\usepackage{graphicx}
+\usepackage[colorlinks]{hyperref} 
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow} 
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{xcolor}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{multirow}  
+\usepackage{amsmath}  
+
+\geometry{a4paper,top=3cm,left=2cm,right=2cm,bottom=3cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Lung Nodule Prognostics}
+\fancyhead[RE,LO]{Raicu Maria, Ro\c sca Eduard}
+\fancyfoot[RE,LO]{DS - Intelligent Modeling 2025-2026}
+\fancyfoot[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+  \color{lime}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{%
+  \color{lime}\leaders\hrule height \footrulewidth\hfill}}
+\hypersetup{
+pdftitle={artTitle},
+pdfauthor={name},
+pdfkeywords={pdf, latex, tex, ps2pdf, dvipdfm, pdflatex},
+bookmarksnumbered,
+pdfstartview={FitH},
+urlcolor=cyan,
+colorlinks=true,
+linkcolor=red,
+citecolor=green,
+}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\linespread{1}
+\makeindex
+\begin{document}
+\begin{titlepage}
+\sloppy
+\begin{center}
+BABE\c S BOLYAI UNIVERSITY, CLUJ NAPOCA, ROM\^ ANIA
+
+FACULTY OF MATHEMATICS AND COMPUTER SCIENCE
+
+\vspace{6cm}
+
+\Huge \textbf{Lung Nodule Prognostics}
+
+\vspace{1cm}
+
+\normalsize -- DS - Intelligent Modeling report --
+
+\end{center}
+
+\vspace{5cm}
+
+\begin{flushright}
+\Large{\textbf{Authors}}\\
+Raicu Maria, Data-Science, 245 \\
+Ro\c sca Eduard, Data-Science, 245 \\
+\end{flushright}
+\vspace{4cm}
+\begin{center}
+2025-2026
+\end{center}
+\end{titlepage}
+\pagenumbering{gobble}
+
+
+
+
+
+\include{chapter0_abstract}
+
+
+
+
+
+\tableofcontents
+\newpage
+\newpage
+\setstretch{1.5}
+\newpage
+\pagenumbering{arabic}
+
+
+
+
+
+\include{chapter1_introduction}
+\include{chapter2_scientific_problem}
+\include{chapter3_related_work}
+\include{chapter4_investigated_approach}
+\include{chapter5_conclusion_and_future_work}
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{BibAll}
+\end{document}

@@ -1,0 +1,43 @@
+\begin{abstract}
+\noindent
+Lung cancer screening with low-dose computed tomography (CT) detects large
+numbers of \emph{indeterminate} pulmonary nodules whose clinical fate is hard
+to predict: some stay harmless for years, while others progress into aggressive
+cancer. Today this risk stratification rests on the subjective visual judgement
+of radiologists, which varies between readers and can lead either to
+overtreatment of benign nodules or to dangerous delays for malignant ones. This
+report asks whether an automated, \emph{intelligent} model can support that
+decision by learning several biologically related properties of a nodule at
+once.
+
+\noindent
+We propose \textit{MultiTaskCrossTalkNet}, a multi-task convolutional neural
+network that jointly predicts a nodule's radiological subtype (ground-glass,
+part-solid, solid) and its malignancy risk (benign vs.\ malignant). Instead of
+rigidly sharing every layer, the network keeps one convolutional branch per task
+and links them through learnable \emph{cross-talk} modules---a cross-stitch unit
+and a co-attention unit---so each task can decide how much to borrow from the
+other. We benchmark this design against single-task baselines that share no
+information.
+
+\noindent
+All experiments use 508 nodule crops from the public LIDC-IDRI dataset,
+converted to Hounsfield units, cropped around the annotated region of interest
+and resized to $128\times128$ pixels. A third clinical task---two-year
+progression---was part of the original design but had to be dropped, because the
+progression labels in the clinical records could not be reliably linked to the
+imaging annotations.
+
+\noindent
+Contrary to our hypothesis, cross-talk did \emph{not} consistently outperform
+single-task learning under the conditions tested. The subtype task collapsed to
+the majority ``solid'' class because of extreme class imbalance (97 of 101 test
+samples were solid), and malignancy prediction gained nothing reliable from
+information sharing. We attribute this to data quality and class distribution
+rather than to the architecture itself, and we identify class-balanced sampling,
+volumetric (3D) inputs, and a corrected progression linkage as the conditions
+under which the multi-task hypothesis is most likely to pay off. We report this
+honest negative result as a useful signal for others applying multi-task
+learning to small, imbalanced medical-imaging datasets.
+
+\end{abstract}
