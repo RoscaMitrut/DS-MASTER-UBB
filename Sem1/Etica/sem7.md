@@ -1,0 +1,7 @@
+# Seminar 7
+
+Companies that build commercial software using open-source components have an ethical obligation to release their source code and contribute back to the open-source community.
+
+I am against this statement because:
+- When someones decides to release some source code on sites like github, they get to choose a license that describes some rules about how it can be used. Most of the times, including myself, programmers don't choose a license or choose very permissive ones that basically say "You can use this and not owe me anything". When a corporation uses that code, they are following the rules (if they even exist) by the book. It's not unfair or unethical to accept a free gift that was given to you.
+- Corporations don't have to publish the source code to contribute to the open source comunity. The publicity they can create is also helpful. For example, if a big company were to use a tool, it shows the world that the tool is trustworthy, and possibly better than other alternatives. This brings more attention and users to the project. At the same time, corporations can also give back with their wallets, offering to sponsor, pay for the servers that host the project, or even hire the original creator to work on it full-time.
