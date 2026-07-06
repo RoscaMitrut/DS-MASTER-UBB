@@ -7,7 +7,7 @@
 - [Etica si integritate academica in stiinta datelor](./Sem1/Etica/)
 - [Colectarea si modelarea datelor](./Sem1/DCM/)
 - ### Sem 2
-- Analiza datelor si descoperirea cunostintelor
+- [Analiza datelor si descoperirea cunostintelor](./Sem2/DataAnalysis/)
 - Instrumente de programare
 - Modelare inteligenta
 - Retele Complexe: Analiza Datelor folosind stiinta Retelelor
