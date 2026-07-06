@@ -3,7 +3,7 @@
 ### Sem 1
 - [Bazele statisticii](./Sem1/BS/)
 - [Instrumente pentru gestiunea datelor](./Sem1/DataTools/)
-- Gandire algoritmica
+- [Gandire algoritmica](./Sem1/GA/)
 - Etica si integritate academica in stiinta datelor
 - Colectarea si modelarea datelor
 - ### Sem 2
