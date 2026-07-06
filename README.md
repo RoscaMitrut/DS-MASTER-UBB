@@ -5,7 +5,7 @@
 - [Instrumente pentru gestiunea datelor](./Sem1/DataTools/)
 - [Gandire algoritmica](./Sem1/GA/)
 - [Etica si integritate academica in stiinta datelor](./Sem1/Etica/)
-- Colectarea si modelarea datelor
+- [Colectarea si modelarea datelor](./Sem1/DCM/)
 - ### Sem 2
 - Analiza datelor si descoperirea cunostintelor
 - Instrumente de programare
